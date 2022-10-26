@@ -13,10 +13,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        AppCenter.start(application, "6161a2f1-302f-4a81-b78f-37c0eb4f22f7", Analytics::class.java, Crashes::class.java);
+        AppCenter.start(application, "016a495a-a289-4113-b637-19736c320d9d", Analytics::class.java, Crashes::class.java);
 
         calculateButton.setOnClickListener {
-            // Crashes.generateTestCrash()
+            Crashes.generateTestCrash()
             try {
                 val interestRate = interestEditText.text.toString().toFloat()
                 val currentAge = ageEditText.text.toString().toInt()
@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
                 if (retirementAge <= currentAge) {
                     Analytics.trackEvent("wrong_age", properties)
                 }
+                resultTextView.text = "At the current rate of $interestRate%, saving \$$monthly by 65."
             } catch(ex: Exception){
                 Analytics.trackEvent(ex.message)
             }
